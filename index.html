@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>高仿饿了么</title>
+	<link rel="stylesheet" href="css/style.css">
+	<script type="text/javascript" src="js/rem.js"></script>
+</head>
+<body>
+	<div class="section" id="rlist">
+		<div class="rl-wrap">
+			<div class="rl-header">
+				<div class="top">
+					<div class="show-loca">
+						<h3 class="loca">
+							<a href="#search">
+								<i class="icon-loca"></i>
+								<span class="loca-word">点击定位</span>
+							</a>
+						</h3>
+					</div>
+					<div class="show-weather">
+						<div class="weather">
+							<h4 class="temp">23°</h4>
+							<p class="dis">阴</p>
+						</div>
+						<img src="https://fuss10.elemecdn.com/3/73/19e992e612e983f517e2690cb3e16png.png?imageMogr/format/webp/thumbnail/!69x69r/gravity/Center/crop/69x69/" class="weather-img">
+					</div>
+				</div>
+				<div class="center">
+					<input type="text" class="rl-search" placeholder="搜索商家、商品">
+				</div>
+				<div class="bottom">
+					<ul>
+						<li><a href="#">超级鸡车</a></li>
+						<li><a href="#">小绍兴</a></li>
+						<li><a href="#">麦当劳</a></li>
+						<li><a href="#">火锅</a></li>
+						<li><a href="#">星巴克</a></li>
+						<li><a href="#">曹氏</a></li>
+						<li><a href="#">花甲米线</a></li>
+						<li><a href="#">必胜客</a></li>
+						<li><a href="#">披萨</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="rl-main">
+				<div class="main-section">
+					<div class="swipe" id="mySwipe">
+						<div class="swipe-wrap">
+						    <div class="item">
+						        第一个板块
+						    </div>
+						    <div class="item">
+						        第二个板块
+						    </div>
+						</div>
+						<ul id="position" class="hidden">
+						    <li class="cur"></li>
+						    <li></li>
+						</ul>
+					</div>
+				</div>
+				<div class="main-rl">
+					<div class="res-wrap">
+						<div class="loading">
+							正在加载请稍后...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<ul>
+				<li><a href="#"><i></i>外卖</a></li>
+				<li><a href="#"><i></i>发现</a></li>
+				<li><a href="#"><i></i>订单</a></li>
+				<li><a href="#"><i></i>我的</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="section" id="addr" style="background: red;">
+		<a href="#detail">商家地址页</a>
+	</div>
+	<div class="section" id="detail">
+		<div class="shop-header">
+			<div class="shop-title">
+				
+			</div>
+			<div class="shop-nav">
+				<ul>
+					<li><div><span class="active">商品</span></div></li>
+					<li><div><span>评价</span></div></li>
+				</ul>
+			</div>
+		</div>
+		<div class="shop-main">
+			<div class="smain-left">
+				<ul class="food-nav">
+					<li>dfadfafd</li>
+				</ul>
+			</div>
+			<div class="smain-right">
+				<h4>热销榜<span class="s-r-dis">大叫好事</span></h4>
+				<dl class="food">
+					<dt class="food-img"></dt>
+					<dd class="food-dis">
+						<h5 class="food-name">打开了放大</h5>
+						<span class="food-title">fda</span>
+						<p class="food-nearly">fda</p>
+						<div class="food-price">
+							<span class="price">￥10.5</span>
+							<p>
+								<i class="ninus">-</i>
+								<span class="num">0</span>
+								<i class="add">+</i>
+							</p>
+						</div>
+					</dd>
+				</dl>
+			</div>
+		</div>
+		<div class="shop-footer">
+			<div class="shop-cart"></div>
+			<div class="shop-send"></div>
+		</div>
+	</div>
+	<div class="section" id="search">
+		<div class="header">
+			<a href="#rlist"></a>
+			<h3>选择地址</h3>
+			<div>
+				<input type="text" id="searchInp" placeholder="请输入地址">
+				<span></span>
+			</div>
+			
+		</div>
+		<div class="search-info-wrap"></div>
+	</div>
+	
+	<script type="text/javascript" src="js/lib/zepto.js"></script>
+	<script type="text/javascript" src="js/lib/swipe.js"></script>
+	<script type="text/javascript" src="js/module/addrModule.js"></script>
+	<script type="text/javascript" src="js/module/rlistModule.js"></script>
+	<script type="text/javascript" src="js/module/detailModule.js"></script>
+	<script type="text/javascript" src="js/module/searchModule.js"></script>
+
+	<script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>

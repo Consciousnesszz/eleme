@@ -1,0 +1,695 @@
+
+/*------------reset------------*/
+
+html, body, h1, h2, h3, h4, h5, h6, p, ol, li, ul, dl, dd, dt, form, input {
+	margin: 0; padding: 0;
+}
+html, body {
+	height: 100%;
+}
+
+body {
+	font-size: 0.3rem;
+	color: #333;
+	font-family: "微软雅黑";
+}
+li {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+	color: #333;
+}
+input {
+	outline: none;
+}
+i, b {
+	font-style: normal;
+}
+
+
+/*-----------public css-----------*/
+.section {
+	height: 100%;
+	width: 100%;
+	display: none;
+	text-align: center;
+}
+
+/*-----------rlist page------------*/
+
+#rlist {
+	background: #f4f4f4;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+}
+.rl-wrap {
+	flex: 1;
+	overflow: auto;
+}
+.rl-wrap .rl-header {
+	background: #0096ff;
+	padding: 0.07rem 0.14rem;
+}
+.rl-wrap .rl-header .top {
+	width: 100%;
+	height: 0.35rem;
+	font-size: 0.16rem;
+	display: flex;
+	justify-content: space-between;
+}
+.rl-wrap .rl-header .top .icon-loca {
+	display: inline-block;
+	background: url(../img/loca.png) no-repeat center;
+	background-size: 0.2rem 0.24rem;
+	width: 0.2rem;
+	height: 0.35rem;
+	vertical-align: middle;
+}
+.rl-wrap .rl-header .top .loca-word {
+	display: inline-block;
+	max-width: 1.8rem;
+	white-space: nowrap;
+	overflow: hidden;
+	color: #fff;
+	font-weight: 100;
+	vertical-align: middle;
+}
+.rl-wrap .rl-header .top .show-weather {
+	display: flex;
+	line-height: 0.14rem;
+	color: #fff;
+	font-size: 0.12rem;
+}
+.rl-wrap .rl-header .top .temp {
+	margin-top: 0.05rem;
+	font-weight: 100;
+	font-size: 0.13rem;
+}
+.rl-wrap .rl-header .top .weather-img {
+	width: 0.28rem;
+	height: 0.28rem;
+	margin-top: 0.05rem;
+	margin-left: 0.03rem;
+}
+.rl-wrap .rl-header .center {
+	width: 100%;
+	height: 0.49rem;
+	margin: 0.04rem 0;
+}
+.rl-wrap .rl-header .center .rl-search{
+	box-sizing: border-box;
+	width: 100%;
+	height: 0.35rem;
+	border: 0;
+	border-radius: 0.35rem;
+	text-align: center;
+	font-size: 0.13rem;
+}
+.rl-wrap .rl-header .bottom {
+	width: 100%;
+	height: 0.14rem;
+	font-size: 0.12rem;
+	line-height: 0.14rem;
+	overflow: hidden;
+}
+.rl-wrap .rl-header .bottom ul {
+	display: flex;
+	overflow: auto;
+	overflow-y: hidden;
+}
+.rl-wrap .rl-header .bottom ul li {
+	flex-shrink: 0;
+}
+.rl-wrap .rl-header .bottom a {
+	display: block;
+	margin-right: 0.15rem;
+	color: #fff;
+}
+.rl-wrap .rl-header .bottom li:last-of-type a {
+	margin-right: 0;
+}
+
+.rl-wrap .main-section{
+	width: 100%;
+	height: 1.7rem;
+	margin-bottom: 0.13rem;
+}
+.rl-wrap .main-rl {
+	background: #fff;
+	padding: 0.1rem;
+}
+.rl-wrap .main-rl .rec-r {
+	font-size: 0.14rem;
+	line-height: 0.14rem;
+	height: 0.24rem
+}
+.rl-wrap .main-rl .res-wrap .loading {
+	font-size: 0.16rem;
+	text-align: center;
+	line-height: 2rem;
+	height: 3rem;
+}
+.rl-wrap .main-rl .restaurant {
+	width: 100%;
+	height: 0.64rem;
+	padding: 0.1rem 0;
+	display: flex;
+	justify-content: space-between;
+	border-top: 1px solid #eee;
+}
+.rl-wrap .main-rl .restaurant .res-img img{
+	width: 0.6rem;
+}
+.rl-wrap .main-rl .restaurant .res-dis {
+	width: 2.8rem;
+	margin-left: 0.015rem;
+	font-size: 0.16rem;
+}
+.dis-top, .dis-center, .dis-bottom{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.dis-center, .dis-bottom{
+	color: #999;
+}
+.rl-wrap .main-rl .restaurant .res-title {
+	max-width: 1.8rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	font-size: 0.15rem;
+} 
+.rl-wrap .main-rl .restaurant .res-title:before {
+	display: inline-block;
+	margin-top: 0.025rem;
+	margin-right: .07rem;
+    padding: 0 .03rem;
+    height: .16rem;
+    border-radius: .032rem;
+    background-color: #ffd930;
+    color: #52250a;
+    content: "\54C1\724C";
+    vertical-align: top;
+    text-align: center;
+    font-weight: 700;
+    font-size: .11rem;
+    line-height: .12rem;
+}
+.rl-wrap .main-rl .restaurant .dis-top .no-brand:before {
+	content: "";
+	display: none;
+}
+.rl-wrap .main-rl .restaurant .top-tag .tags{
+	display: inline-block;
+	font-size: 0.11rem;
+	line-height: 0.11rem;
+	color: rgb(153,153,153);
+	border: 1px solid rgb(221, 221, 221);
+	margin-bottom: 0.03rem;
+	margin-left: 0.03rem;
+}
+.rl-wrap .main-rl .restaurant .res-info {
+	color: #666;
+	font-size: 0.12rem;
+	margin: 0.04rem 0;
+}
+.rl-wrap .main-rl .restaurant .res-info span {
+	color: #ff6000;
+	padding: 0 0.03rem;
+}
+.rl-wrap .main-rl .restaurant .center-tag {
+	font-size: 0.12rem;
+}
+.rl-wrap .main-rl .restaurant .ontime {
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0 .02rem;
+	margin-right: 0.03rem; 
+    border: 1px solid #44a5ff;
+    border-radius: .02rem;
+    background-color: #fff;
+    color: #2395ff;
+    font-size: .12rem;
+    line-height: .16rem;
+}
+.rl-wrap .main-rl .restaurant .feeder {
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0 .02rem;
+    border: 1px solid #44a5ff;
+    border-radius: .02rem;
+    font-size: .12rem;
+    line-height: .16rem;
+	background-color: #2395ff;
+	color: #fff;
+}
+.rl-wrap .main-rl .restaurant .dis-bottom {
+	font-size: 0.12rem;
+}
+.rl-wrap .main-rl .restaurant .r-time {
+	color: #2395ff;
+}
+.rl-wrap .more:after {
+	content: "正在加载更多商家";
+	display: block;
+	width: 100%;
+	height: 0.3rem;
+	line-height: 0.3rem;
+	font-size: 0.14rem;
+	text-align: center;
+	background: #fff;
+}
+.rl-wrap .no-more:after	{
+	content: "没有更多商家了- -!";
+	display: block;
+	width: 100%;
+	height: 0.3rem;
+	line-height: 0.3rem;
+	font-size: 0.14rem;
+	text-align: center;
+	background: #fff;
+}
+
+.footer {
+	width: 100%;
+	height: 0.5rem;
+	background: #fff;
+	border-top: 1px solid #eee;
+}
+.footer ul {
+	display: flex;
+	justify-content: space-around;
+	align-content: center;
+	width: 100%;
+	height: 100%;
+}
+.footer ul li {
+	width: 25%;
+	height: 100%;
+}
+.footer ul li a {
+	display: block;
+	width: 100%;
+	height: 100%;
+	color: #999;
+	font-size: 0.12rem;
+	line-height: 0.7rem;
+	text-align: center;
+	overflow: hidden;
+}
+
+
+
+
+
+
+
+/*-----------search page------------*/
+#search {
+	background: #f4f4f4;
+	position: absolute;
+	top: 0;
+	left: 100%;
+	z-index: 7;
+}
+#search .header{
+	background: #0096ff;
+	width: 100%;
+	height: 0.79rem;
+	padding-bottom: 0.09rem;
+}
+#search .header h3 {
+	font-size: 0.18rem;
+	line-height: 0.47rem;
+	color: #fff;
+	font-weight: normal;
+}
+#search .header a {
+	display: block;
+	position: absolute;
+	left: 0.07rem;
+	top: 0.05rem;
+	width: 0.31rem;
+	height: 0.31rem;
+	background: url(../img/arrow.png) no-repeat center;
+	background-size: 40% 70%;
+	opacity: 0.7;
+}
+#search .header > div {
+	position: relative;
+}
+#search .header span {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0.3rem;
+	width: 0.27rem;
+	height: 0.27rem;
+	background: url(../img/x.png) no-repeat center;
+}
+#searchInp {
+	display: block;
+	margin: 0 auto;
+	width: 3rem;
+	height: 0.27rem;
+	padding: 0 0.18rem;
+	font-size: 0.14rem;
+	line-height: 0.27rem;
+	border-radius: 0.18rem;
+	border: none;
+}
+.search-info-wrap {
+	width: 100%;
+}
+.searchInfo {
+	width: 100%;
+	padding: 0.1rem 0.15rem;
+	box-sizing: border-box;
+	background: #fff;
+	margin: 0 auto;
+	text-align: left;
+	position: relative;
+}
+.searchInfo:after{
+	content: "";
+	display: block;
+	position: absolute;
+	height: 1px;
+	width: 3.45rem;
+	background: #ccc;
+	transform: scale(1,0.5);
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+}
+.searchInfo h4 {
+	line-height: 0.14rem;
+	font-size: 0.14rem;
+	font-weight: 700;
+	color: #333;
+}
+.searchInfo p {
+	line-height: 0.12rem;
+	font-size: 0.12rem;
+	color: #999;
+	margin-top: 0.05rem;
+}
+
+
+
+
+
+
+/*-----------detail page------------*/
+
+#detail {
+	background: #f1f1f1;
+	text-align: left;
+	display: flex;
+	flex-direction: column;
+}
+.shop-header {
+	width: 100%;
+	height: 1.65rem;
+	background: #f00;
+}
+.shop-title {
+	height: 1.2rem;
+	background: #ccc;
+	padding-bottom: 0.07rem;
+}
+.shop-title .s-t-top {
+	height: 0.3rem;
+}
+.shop-title .s-t-top i {
+	display: block;
+	width: 0.2rem;
+	height: 0.3rem;
+	background: url(../img/arrow2.png) no-repeat center;
+	background-size: 50% 66%;
+	margin-left: 0.12rem;
+}
+.shop-title .s-t-center {
+	height: 0.75rem;
+	font-size: 0.14rem;
+}
+.shop-title .s-t-center .shop-name {
+	width: 100%;
+	display: flex;
+	padding: 0 0.1rem;
+	box-sizing: border-box;
+}
+.shop-title .s-t-center .shop-img {
+	width: 0.6rem;
+	height: 0.6rem;
+	margin: 0 0.1rem 0 0.05rem;
+	overflow: hidden;
+	border-radius: 0.03rem;
+}
+.shop-title .s-t-center .shop-img img {
+	width: 100%;
+	height: 100%;
+}
+.shop-title .s-t-center .shop-dis {
+	flex: 1;
+	color: #fff;
+	position: relative;
+}
+.shop-title .s-t-center .shop-dis li h3 {
+	font-size: 0.18rem;
+}
+.shop-title .s-t-center .shop-dis li {
+	font-size: 0.1rem;
+	width: 2.8rem;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.shop-title .s-t-center .shop-dis li:last-of-type {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 0.2rem;
+	height: 100%;
+	transform: rotate(180deg);
+	background: url(../img/arrow2.png) no-repeat center;
+	background-size: 40% 30%;
+}
+.shop-title .s-t-bottom {
+	font-size: 0.12rem;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 0 0.1rem;
+	display: flex;
+	justify-content: space-between;
+	color: #fff;
+}
+.shop-title .s-t-bottom i {
+	margin-right: .04rem;
+	font-size: .12rem;
+	font-style: normal;
+	line-height: 1;
+	height: .14rem;
+	display: inline-block;
+	box-sizing: border-box;
+	text-align: center;
+	border: 1px solid;
+	border-radius: .02rem;
+}
+.shop-title .s-t-bottom .cut {
+	background-color: rgb(240, 115, 115);
+	color: rgb(255, 255, 255);
+	border-color: rgb(240, 115, 115);
+}
+.shop-title .s-t-bottom .new {
+	background-color: rgb(112, 188, 70);
+    color: rgb(255, 255, 255);
+    border-color: rgb(112, 188, 70);
+}
+
+.shop-nav {
+	height: 0.45rem;
+	background: #fff;
+}
+.shop-nav ul {
+	width: 100%;
+	display: flex;
+}
+.shop-nav ul li {
+	width: 50%;
+	text-align: center;
+	font-size: 0.14rem;
+	color: #999;
+	line-height: 0.45rem;
+}
+.shop-nav ul li .active {
+	padding-bottom: 0.05rem;
+	border-bottom: 1px solid #3190e8;
+	color: #3190e8;
+}
+
+.shop-main {
+	width: 100%;
+	flex: 1;
+	background: #ff0;
+	display: flex;
+	border-top: 1px solid #f4f4f4;
+}
+.shop-main .smain-left {
+	width: 0.7rem;
+	height: 100%;
+	overflow-y: scroll;
+	background: #f4f4f4;
+}
+.shop-main .smain-left li {
+	font-size: 0.16rem;
+	text-align: center;
+	height: 0.6rem;
+	line-height: 0.6rem;
+	width: 100%;
+}
+.shop-main .smain-left .active {
+	background: #fff;
+}
+.shop-main .smain-right {
+	flex: 1;
+	height: 100%;
+	overflow-y: scroll;
+}
+.shop-main .smain-right h4 {
+	background: #f4f4f4;
+	font-size: 0.14rem;
+	height: 0.30rem;
+	line-height: 0.30rem;
+	padding: 0 0.12rem;
+}
+.shop-main .smain-right h4 span{
+	font-size: 0.11rem;
+	color: #999;
+	margin-left: 0.05rem;
+	font-weight: normal;
+}
+.shop-main .smain-right .food {
+	background: #fff;
+	display: flex;
+	height: 0.75rem;
+	padding: 0.12rem;
+}
+.shop-main .smain-right .food-img {
+	width: 0.5rem;
+	height: 0.5rem;
+	background: #aaa;
+	margin-right: 0.05rem;
+}
+.shop-main .smain-right .food-img img {
+	width: 100%;
+}
+.shop-main .smain-right .food-dis {
+	flex: 1;
+}
+.shop-main .smain-right .food-dis h5 {
+	font-size: 0.14rem;
+	overflow: hidden;
+}
+.shop-main .smain-right .food-dis .food-title {
+	font-size: 0.1rem;
+	color: #999;
+	margin: 0 0.04rem;
+	line-height: 0.1rem;
+}
+.shop-main .smain-right .food-dis .food-nearly {
+	font-size: 0.12rem;
+	color: #666;
+	line-height : 0.14rem;
+}
+.shop-main .smain-right .food-dis .food-price {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 0.10rem;
+}
+.shop-main .smain-right .food-dis .food-price .price {
+	color: #f60;
+	font-size: 0.14rem;
+}
+.shop-main .smain-right .food-dis .food-price .ninus {
+	display: inline-block;
+	color: #3190e8;
+	font-size: 0.14rem;
+	width: 0.15rem;
+	height: 0.15rem;
+	border: 1px solid #3190e8;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+.shop-main .smain-right .food-dis .food-price .add {
+	display: inline-block;
+	background: #3190e8;
+	font-size: 0.14rem;
+	color: #fff;
+	width: 0.15rem;
+	height: 0.15rem;
+	border-radius: 50%;
+	box-sizing: border-box;
+}
+.shop-main .smain-right .food-dis .food-price .num {
+	display: inline-block;
+	width: 0.15rem;
+	height: 0.15rem;
+	font-size: 0.12rem;
+	line-height: 0.15rem;
+	text-align: center;
+}
+
+
+
+/*-------------轮播图样式  必须-----------*/
+.swipe{
+    overflow: hidden;
+    visibility: hidden;
+    position:relative;
+    height: 100%;
+}
+.swipe-wrap{
+    overflow-x:hidden;
+    position:relative;
+    height: 100%;
+}
+.swipe-wrap > div {
+    float: left;
+    width: 100%;
+    position:relative;
+   	height: 100%;
+   	background: #fff;
+}
+
+/* 小数点布局 */
+#position{
+   position: absolute;
+   bottom: 0rem;
+   left: 0;
+   margin-top: 0.426667rem;
+   margin-bottom: 0.213333rem;
+   margin: 0;
+   opacity: 0.4;
+   width: 100%;
+   filter: alpha(opacity=50);
+   text-align: center;
+}
+ 
+#position li{
+      width: 0.07rem;
+      height: 0.07rem;
+      margin: 0 0.02rem;
+      display: inline-block;
+      -webkit-border-radius: 50%;
+      border-radius: 50%;
+      background-color: #aaa;
+}
+#position li.cur{
+    background-color: #000;
+}

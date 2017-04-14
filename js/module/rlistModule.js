@@ -5,13 +5,13 @@ rlistModule = $.extend(rlistModule, {
 	dom : $('#rlist'),
 	lat : "",
 	lnt : "",
+	swipe : null,
 	bindEvent : function(){
 		//调用轮播图的初始化方法
 		var li_list = $("#position li");
-		Swipe(document.getElementById('mySwipe'), {
+		this.swipe = Swipe(document.getElementById('mySwipe'), {
 		  auto: false,
 		  callback: function(pos) { 
-		  	console.log(pos);
 		  	//pos当前滑动板块的索引值
 		  	//当滑动结束后 所需要执行的方法
 		  	li_list.eq(pos).addClass('cur');
@@ -144,14 +144,8 @@ rlistModule = $.extend(rlistModule, {
 	},
 	loadContent : function (response){
 		var str = "";
-		/*  获取图片地址  */
-		var _path = response.image_path;
-		var img_path = "https://fuss10.elemecdn.com/" + _path.substring(0, 1) + "/" + _path.substring(1, 3) + "/" + _path.substring(3);
-		if (_path.indexOf('jpeg') > 0) {
-			img_path += ".jpeg?imageMogr/format/webp/";
-		} else {
-			img_path += ".png?imageMogr/format/webp/"
-		}
+		// 获取图片
+		var img_path = this.getImg(response);
 		/*  拼接html结构  */
 		str += '<a href="#detail-' + response.id + '"><dl class="restaurant">'+
 			'<dt class="res-img">'+
@@ -202,5 +196,9 @@ rlistModule = $.extend(rlistModule, {
 			'</dd>'+
 		'</dl></a>';
 		return str;
+	},
+	unbindEvent : function (){
+		$(this).unbind();
+		this.swipe = null;
 	}
 })

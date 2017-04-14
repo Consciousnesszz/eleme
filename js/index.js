@@ -28,7 +28,8 @@ var moduleCtrl = function(){
 	} else {
 		// 获取传送的坐标
 		var arr = hash.split("-");
-		module = hashModuleMap[arr[0]];
+		var moduleName = arr[0];
+		module = hashModuleMap[moduleName];
 		var info = arr[1]; // geohash / shopId
 	}
 	// 记录module
@@ -41,9 +42,9 @@ var moduleCtrl = function(){
 
 	module.enter(); // 当前enter
 
-	if (!catchModule[hash]) {  // 进行判断只绑定一次事件
+	if (!catchModule[moduleName]) {  // 进行判断只绑定一次事件
 		module.init(); // 初始化
-		catchModule[hash] = true;
+		catchModule[moduleName] = true;
 	}
 	if (module.nearbyRes) {
 		module.nearbyRes(info);

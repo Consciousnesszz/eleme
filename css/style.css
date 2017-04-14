@@ -9,7 +9,7 @@ html, body {
 }
 
 body {
-	font-size: 0.3rem;
+	font-size: 0.12rem;
 	color: #333;
 	font-family: "微软雅黑";
 }
@@ -410,6 +410,10 @@ i, b {
 #detail {
 	background: #f1f1f1;
 	text-align: left;
+}
+.detail-flex {
+	width: 100%;
+	height: 100%;
 	display: flex;
 	flex-direction: column;
 }
@@ -536,30 +540,36 @@ i, b {
 .shop-main {
 	width: 100%;
 	flex: 1;
-	background: #ff0;
 	display: flex;
+	background: #fff;
 	border-top: 1px solid #f4f4f4;
 }
 .shop-main .smain-left {
-	width: 0.7rem;
+	width: 0.9rem;
 	height: 100%;
-	overflow-y: scroll;
+	overflow: hidden; /*Iscroll属性*/
+	position: relative; /*Iscroll属性*/
 	background: #f4f4f4;
 }
 .shop-main .smain-left li {
-	font-size: 0.16rem;
+	font-size: 0.13rem;
 	text-align: center;
 	height: 0.6rem;
 	line-height: 0.6rem;
 	width: 100%;
+	overflow: hidden;
+	box-sizing: border-box;
+	border-left: 4px solid transparent;
 }
 .shop-main .smain-left .active {
 	background: #fff;
+	border-left: 4px solid #3190e8;
 }
 .shop-main .smain-right {
 	flex: 1;
 	height: 100%;
-	overflow-y: scroll;
+	overflow: hidden; /*Iscroll属性*/
+	position: relative; /*Iscroll属性*/
 }
 .shop-main .smain-right h4 {
 	background: #f4f4f4;
@@ -577,14 +587,15 @@ i, b {
 .shop-main .smain-right .food {
 	background: #fff;
 	display: flex;
-	height: 0.75rem;
-	padding: 0.12rem;
+	margin: 0.12rem;
+	margin-bottom: 0;
+	border-bottom: 1px solid #eee;
 }
 .shop-main .smain-right .food-img {
 	width: 0.5rem;
 	height: 0.5rem;
 	background: #aaa;
-	margin-right: 0.05rem;
+	margin-right: 0.1rem;
 }
 .shop-main .smain-right .food-img img {
 	width: 100%;
@@ -592,15 +603,17 @@ i, b {
 .shop-main .smain-right .food-dis {
 	flex: 1;
 }
-.shop-main .smain-right .food-dis h5 {
+.shop-main .smain-right .food-dis .food-name {
 	font-size: 0.14rem;
 	overflow: hidden;
 }
 .shop-main .smain-right .food-dis .food-title {
 	font-size: 0.1rem;
 	color: #999;
-	margin: 0 0.04rem;
-	line-height: 0.1rem;
+	margin: 0.04rem 0;
+	line-height: 0.12rem;
+	max-height: 0.24rem;
+	overflow: hidden;
 }
 .shop-main .smain-right .food-dis .food-nearly {
 	font-size: 0.12rem;
@@ -610,40 +623,153 @@ i, b {
 .shop-main .smain-right .food-dis .food-price {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 0.10rem;
+	align-items: center;
+	margin: 0.05rem 0 0.12rem;
+	height: 0.2rem;
 }
 .shop-main .smain-right .food-dis .food-price .price {
 	color: #f60;
 	font-size: 0.14rem;
 }
-.shop-main .smain-right .food-dis .food-price .ninus {
+.foods-minus {
 	display: inline-block;
 	color: #3190e8;
+	text-align: center;
+	line-height: 0.15rem;
 	font-size: 0.14rem;
 	width: 0.15rem;
 	height: 0.15rem;
 	border: 1px solid #3190e8;
 	border-radius: 50%;
 	box-sizing: border-box;
+	vertical-align: middle;
+	visibility: hidden;
 }
-.shop-main .smain-right .food-dis .food-price .add {
+.foods-plus {
 	display: inline-block;
 	background: #3190e8;
+	text-align: center;
+	line-height: 0.15rem;
 	font-size: 0.14rem;
 	color: #fff;
 	width: 0.15rem;
 	height: 0.15rem;
 	border-radius: 50%;
 	box-sizing: border-box;
+	vertical-align: middle;
 }
-.shop-main .smain-right .food-dis .food-price .num {
+.foods-num {
 	display: inline-block;
 	width: 0.15rem;
 	height: 0.15rem;
 	font-size: 0.12rem;
-	line-height: 0.15rem;
+	height: 100%;
+	vertical-align: middle;
 	text-align: center;
+	visibility: hidden;
 }
+.shop-footer {
+	height: 0.45rem;
+	background: #555;
+	display: flex;
+	font-size: 0.1rem;
+	justify-content: space-between;
+	color: #fff;
+	position: relative;
+	z-index: 10;
+}
+.shop-footer .shop-cart {
+	display: flex;
+	position: relative;
+}
+.shop-footer .shop-cart .cart-img {
+	position: absolute;
+	width: 0.5rem;
+	height: 0.5rem;
+	background: #f00;
+	border-radius: 50%;
+	top: -0.15rem;
+	left: 0.1rem;
+}
+.shop-footer .shop-cart .cart-price {
+	margin-left: 0.7rem;
+}
+.shop-footer .shop-cart .cart-price p {
+	font-size: 0.16rem;
+}
+.shop-footer .shop-send {
+	width: 1rem;
+	font-size: 0.14rem;
+	height: 100%;
+	background: #ccc;
+	text-align: center;
+	line-height: 0.45rem;
+}
+.show-cart-foods {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	background: rgba(0,0,0,0.3);
+	display: none;
+}
+.show-cart-foods .show-info {
+	position: absolute;
+	bottom: 0.45rem;
+	left: 0;
+	width: 100%;
+	background: #fff;
+}
+.show-cart-foods .show-info .show-header {
+	padding: .05rem .15rem;
+    border-bottom: 1px solid #ddd;
+    background-color: #eceff1;
+    color: #666;
+    line-height: 0.25rem; 
+    display: flex;
+    justify-content: space-between;
+}
+.show-cart-foods .show-info .show-header .show-title {
+	border-left: 4px solid #3190e8;
+	padding-left: 0.1rem;
+}
+.show-cart-foods .show-info .show-content {
+	width: 100%;
+}
+.show-cart-foods .show-info .show-content ul{
+	padding: 0.1rem 0.15rem;
+	height: 0.5rem;
+	width: 100%;
+	box-sizing: border-box;
+}
+.show-cart-foods .show-info .show-content ul li{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+.show-cart-foods .show-info .cart-food-left h5 {
+	font-size: 0.14rem;
+	font-weight: normal;
+}
+.show-cart-foods .show-info .cart-food-left p {
+	font-size: 0.1rem;
+	color: #999;
+}
+.show-cart-foods .show-info .cart-food-right{
+	display: flex;
+	width: 1.2rem;
+	justify-content: space-between;
+	line-height: 0.3rem;
+}
+.show-cart-foods .show-info .cart-food-right .count-all{
+    color: #f60;
+    font-size: 0.14rem;
+    font-weight: 700;
+}
+
 
 
 

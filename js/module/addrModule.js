@@ -1,6 +1,9 @@
 var addrModule = {
 	name : '商家地址页',
 	dom : $('#addr'),
+	local : {
+
+	},
 	init : function(){
 		this.bindEvent();
 	},
@@ -9,11 +12,12 @@ var addrModule = {
 	},
 	store : function (name, info){
 		if (info) {
-			localStorage.setItem(name, JSON.stringify(info));
+			this.local[info.id] = info;
+			localStorage.setItem(name, JSON.stringify(this.local));
 			return;
 		} else {
-			var str = localStorage.getItem(name);
-			return str;
+			var obj = JSON.parse(localStorage.getItem(name));
+			return obj;
 		}
 	},
 	getImg : function(response){

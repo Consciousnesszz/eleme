@@ -707,16 +707,16 @@ i, b {
 }
 .show-cart-foods {
 	position: absolute;
-	left: 0;
-	right: 0;
+	width: 100%;
+	height: 6.25rem;
 	top: 0;
-	bottom: 0;
+	left: 0;
 	background: rgba(0,0,0,0.3);
 	display: none;
 }
 .show-cart-foods .show-info {
 	position: absolute;
-	bottom: 0.45rem;
+	bottom: 0;
 	left: 0;
 	width: 100%;
 	background: #fff;
@@ -739,13 +739,12 @@ i, b {
 }
 .show-cart-foods .show-info .show-content ul{
 	padding: 0.1rem 0.15rem;
-	height: 0.5rem;
 	width: 100%;
 	box-sizing: border-box;
 }
 .show-cart-foods .show-info .show-content ul li{
-	height: 100%;
 	width: 100%;
+	height: 0.5rem;
 	display: flex;
 	justify-content: space-between;
 }
@@ -769,7 +768,14 @@ i, b {
     font-size: 0.14rem;
     font-weight: 700;
 }
-
+.show-cart-foods .show-info .cart-food-right .foods-num {
+	height: 0.15rem;
+	line-height: 0.15rem;
+	visibility: visible;
+}
+.show-cart-foods .show-info .cart-food-right .foods-minus {
+	visibility: visible;
+}
 
 
 

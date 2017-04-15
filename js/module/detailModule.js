@@ -3,11 +3,11 @@ var detailModule = Object.create(addrModule);
 detailModule = $.extend(detailModule, {
 	name : '食物详情页',
 	dom : $('#detail'),
-	bindEvent : function(){
-
-	},
 	foods : {
 		// 用于缓存页面食物信息
+	},
+	bindEvent : function(){
+
 	},
 	CreateFood : function(that, obj){
 		/*---------创建 food 实例--------*/
@@ -44,53 +44,86 @@ detailModule = $.extend(detailModule, {
 			return strFood;
 		};
 
-		CreateFood.prototype.plus = function(){
+		CreateFood.prototype.plus = function(foodId){
+			
+			// 改变数量
 			this.num++;
+			$("[data-foodId='"+ foodId +"']").find(".foods-num").text(this.num);
+			// 显示数量和减法按钮
+			$("[data-foodId='"+ foodId +"']").find(".foods-num").css("visibility", "visible");
+			$("[data-foodId='"+ foodId +"']").find(".foods-minus").css("visibility", "visible");
+
+			
 		};
 
-		CreateFood.prototype.minus = function(){
-			if (this.num > 0) {
-				this.num--;
+		CreateFood.prototype.minus = function(foodId){
+			// 改变数量
+			this.num--;
+			$("[data-foodId='"+ foodId +"']").find(".foods-num").text(this.num);
+			if (this.num == 0) {
+				// 隐藏数量和减法按钮
+				$("[data-foodId='"+ foodId +"']").find(".foods-num").css("visibility", "hidden");
+				$("[data-foodId='"+ foodId +"']").find(".foods-minus").css("visibility", "hidden");
+				// 移除购物车元素
+				$(".show-content [data-foodId='"+ foodId +"']").remove();
+				// 删除local中缓存的数据
+				delete that.local[foodId];
 			}
+			
 		}
 
 		return new CreateFood();
 	},
-	showCart : function(obj) {
+	showCart : function(that, obj) {
 		console.log(obj);
-		var str = 
-			'<li data-foodId="'+ obj.id +'">'+
-				'<div class="cart-food-left">'+
-					'<h5>'+ obj.name +'</h5>';
-			if (obj.type) {
-				str += '<p>'+ obj.type + '</p>';
-			}
-			str += 
-				'</div>'+
-				'<div class="cart-food-right">'+
-					'<div>'+
-						'<span class="count-all">￥' + obj.price * obj.num + '</span>'+
-					'</div>'+
-					'<div class="oprate">'+
-						'<i class="foods-minus">-</i>'+
-						'<span class="foods-num">' + obj.num + '</span>'+
-						'<i class="foods-plus">+</i>'+
-					'</div>'+
-				'</div>'+
-			'</li>';
 		if ($(".show-content [data-foodId='"+ obj.id +"']").length > 0) {
 			$(".show-content [data-foodId='"+ obj.id +"']").find(".foods-num").text(obj.num);
 			$(".show-content [data-foodId='"+ obj.id +"']").find(".count-all").text("￥" + obj.num * obj.price);
-		}else {
-			console.log('b');
+		} else {
+			var str = 
+				'<li class="food" data-foodId="'+ obj.id +'">'+
+					'<div class="cart-food-left">'+
+						'<h5>'+ obj.name +'</h5>';
+				if (obj.type) {
+					str += '<p>'+ obj.type + '</p>';
+				}
+				str += 
+					'</div>'+
+					'<div class="cart-food-right">'+
+						'<div>'+
+							'<span class="count-all">￥' + obj.price * obj.num + '</span>'+
+						'</div>'+
+						'<div class="oprate">'+
+							'<i class="foods-minus">-</i>'+
+							'<span class="foods-num">' + obj.num + '</span>'+
+							'<i class="foods-plus">+</i>'+
+						'</div>'+
+					'</div>'+
+				'</li>';
 			$(".show-content ul").append($(str));
+
+			// 给购物车绑定加减事件
+			$(".show-content .foods-plus").click(function(){
+				var dom = $(this).closest('.food');
+				var foodId = dom.data('foodid');
+				var curObj = that.foods[foodId];
+				
+				curObj.plus(foodId);
+			});
+			$(".show-content .foods-minus").click(function(){
+				var dom = $(this).closest('.food');
+				var foodId = dom.data('foodid');
+				var curObj = that.foods[foodId]
+
+				curObj.minus(foodId);
+			});
 		}
 	},
 	shopInfo : function(shopId) {
 		this.loadHeader(shopId);
 		this.loadFood(shopId);
 	},
-	loadHeader : function(shopId){
+	loadHeader : function(shopId) {
 		var that = this;
 		$.ajax({
 			url : "https://mainsite-restapi.ele.me/shopping/restaurant/" + shopId,
@@ -147,7 +180,7 @@ detailModule = $.extend(detailModule, {
 			}
 		})
 	},
-	loadFood : function (shopId){
+	loadFood : function (shopId) {
 		var that = this;
 		$.ajax({
 			url : "https://mainsite-restapi.ele.me/shopping/v2/menu?restaurant_id=" + shopId,
@@ -169,9 +202,9 @@ detailModule = $.extend(detailModule, {
 				$(".food-nav").html(strNav);
 				$(".food-wrap").html(strFood);
 				//如果Iscroll已经实例过了，让它直接毁灭
-				if(typeof leftScroll !== 'undefined' || typeof rightSrcoll !== 'undefined') {
+				if(typeof leftScroll !== 'undefined' || typeof rightScroll !== 'undefined') {
 					leftScroll.destroy();
-					rightSrcoll.destroy();
+					rightScroll.destroy();
 				}
 				// 绑定滚动条
 				window.leftScroll = new IScroll('.smain-left', {
@@ -222,46 +255,56 @@ detailModule = $.extend(detailModule, {
 					isShow ? $(".show-cart-foods").hide() : $(".show-cart-foods").show();
 					isShow = !isShow;
 				})
-				/*$(".show-cart-foods").click(function(){
-					$(".show-cart-foods").hide()
-				});*/
+				$(".show-cart-foods").click(function(e){
+					if (e.target === $(".show-cart-foods")[0]) {
+						$(".show-cart-foods").hide()
+					}
+				});
 
 				// 食物加减
 				$('.foods-plus').click(function(){
-					//通过事件代理 绑定加法事件;
 					var dom = $(this).closest('.food');
 					var foodId = dom.data('foodid');
-					var curObj = that.foods[foodId]
-
-					// 改变数量
-					curObj.plus();
-					$("[data-foodid='"+ foodId +"']").find(".foods-num").text(curObj.num);
-					// 显示数量和减法按钮
-					$("[data-foodid='"+ foodId +"']").find(".foods-num").css("visibility", "visible");
-					$("[data-foodid='"+ foodId +"']").find(".foods-minus").css("visibility", "visible");
-						
-					// 创建购物车元素
-					that.showCart(curObj);
+					var curObj = that.foods[foodId];
+					
+					curObj.plus(foodId);
+					// 创建、修改购物车元素
+					that.showCart(that, curObj);
+					// 将购物车中的所有内容保存到localSrorage
+					for (var n = 0; n < $(".show-content .food").length; n++){
+						var id = $('.show-content .food').eq(n).attr('data-foodid');
+						that.store(shopId, that.foods[id]);
+					}
 				});
 				$(".foods-minus").click(function(){
-					
 					var dom = $(this).closest('.food');
 					var foodId = dom.data('foodid');
 					var curObj = that.foods[foodId]
 
 					// 改变数量
-					curObj.minus();
-					$("[data-foodid='"+ foodId +"']").find(".foods-num").text(curObj.num);
-					// 数量为 0 隐藏 数量、减法按钮 移除购物车节点
-					if (curObj.num == 0) {
-						dom.find(".foods-num").css("visibility", "hidden");
-						dom.find(".foods-minus").css("visibility", "hidden");
-						$(".show-content [data-foodId='"+ curObj.id +"']").remove();
-						return;
+					curObj.minus(foodId);
+
+					if (curObj.num > 0) {
+						// 修改、删除购物车元素
+						that.showCart(that, curObj);
 					}
-					// 修改购物车元素
-					that.showCart(curObj);
-				})
+					// 将购物车中的所有内容保存到localSrorage
+					for (var n = 0; n < $(".show-content .food").length; n++){
+						var id = $('.show-content .food').eq(n).attr('data-foodid');
+						that.store(shopId, that.foods[id]);
+					}
+				});
+
+				// 加载浏览历史
+				var obj = that.store(shopId);
+				if (obj) {
+					for(var prop in obj) {
+						that.foods[prop].num = obj[prop].num;
+						$("[data-foodId='"+ prop +"']").find('.foods-num').text(obj[prop].num).css("visibility", "visible");
+						$("[data-foodId='"+ prop +"']").find('.foods-minus').css("visibility", "visible");
+						that.showCart(that, obj[prop]);
+					}
+				}
 			},
 			error : function (){
 				console.log("fail")

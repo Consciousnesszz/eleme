@@ -37,8 +37,6 @@
       构造函数
       原型继承
       
-    购物车逻辑
+    购物车逻辑
     
-    localStorage 的使用
-
-    
+    localStorage的使用

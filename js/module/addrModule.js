@@ -2,7 +2,7 @@ var addrModule = {
 	name : '商家地址页',
 	dom : $('#addr'),
 	local : {
-
+		// 用于缓存localStorage中的数据
 	},
 	init : function(){
 		this.bindEvent();

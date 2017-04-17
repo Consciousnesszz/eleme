@@ -35,6 +35,27 @@ rlistModule = $.extend(rlistModule, {
 					that.lnt = response.longitude;
 				}
 			})
+
+			/*--------获取轮播内容---------*/
+			$.ajax({
+				url : 'https://mainsite-restapi.ele.me/v2/index_entry?geohash=' + geohash,
+				type : "get",
+				success : function(response){
+					for(var i = 0; i < response.length; i++) {
+						var img_path = 'https://fuss10.elemecdn.com'+ response[i].image_url +'?imageMogr/format/webp/';
+						var str = 
+							'<div class="lump">'+
+								'<img src="'+ img_path +'">'+
+								'<p>'+ response[i].title +'</p>'+
+							'</div>'
+						if (i <= 7) {
+							$(".page_1").append($(str));
+						} else {
+							$(".page_2").append($(str));
+						}
+					}
+				}
+			})
 			/*--------获取热词---------*/ 
 			$(".rl-header .bottom ul").empty();
 			$.ajax({

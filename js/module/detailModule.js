@@ -45,21 +45,30 @@ detailModule = $.extend(detailModule, {
 		};
 
 		CreateFood.prototype.plus = function(foodId){
-			
 			// 改变数量
 			this.num++;
 			$("[data-foodId='"+ foodId +"']").find(".foods-num").text(this.num);
+			$("[data-foodId='"+ foodId +"']").find(".count-all").text("￥" + (this.num * this.price));
 			// 显示数量和减法按钮
 			$("[data-foodId='"+ foodId +"']").find(".foods-num").css("visibility", "visible");
 			$("[data-foodId='"+ foodId +"']").find(".foods-minus").css("visibility", "visible");
 
-			
+			// 创建、修改购物车元素
+			that.showCart(that, that.foods[foodId]);
+
+			// 将购物车中的所有内容保存到localSrorage
+			for (var n = 0; n < $(".show-content .food").length; n++){
+				var id = $('.show-content .food').eq(n).attr('data-foodid');
+				that.store(that.foods[foodId].shopId, that.foods[foodId]);
+			}
 		};
 
 		CreateFood.prototype.minus = function(foodId){
 			// 改变数量
 			this.num--;
 			$("[data-foodId='"+ foodId +"']").find(".foods-num").text(this.num);
+			$("[data-foodId='"+ foodId +"']").find(".count-all").text("￥" + (this.num * this.price));
+			
 			if (this.num == 0) {
 				// 隐藏数量和减法按钮
 				$("[data-foodId='"+ foodId +"']").find(".foods-num").css("visibility", "hidden");
@@ -68,6 +77,14 @@ detailModule = $.extend(detailModule, {
 				$(".show-content [data-foodId='"+ foodId +"']").remove();
 				// 删除local中缓存的数据
 				delete that.local[foodId];
+			} else {
+				// 修改购物车元素
+				that.showCart(that, that.foods[foodId]);
+				// 将购物车中的所有内容保存到localSrorage
+				for (var n = 0; n < $(".show-content .food").length; n++){
+					var id = $('.show-content .food').eq(n).attr('data-foodid');
+					that.store(that.foods[foodId].shopId, that.foods[foodId]);
+				}
 			}
 			
 		}
@@ -75,7 +92,6 @@ detailModule = $.extend(detailModule, {
 		return new CreateFood();
 	},
 	showCart : function(that, obj) {
-		console.log(obj);
 		if ($(".show-content [data-foodId='"+ obj.id +"']").length > 0) {
 			$(".show-content [data-foodId='"+ obj.id +"']").find(".foods-num").text(obj.num);
 			$(".show-content [data-foodId='"+ obj.id +"']").find(".count-all").text("￥" + obj.num * obj.price);
@@ -103,6 +119,9 @@ detailModule = $.extend(detailModule, {
 			$(".show-content ul").append($(str));
 
 			// 给购物车绑定加减事件
+			$(".show-content .foods-plus").unbind();
+			$(".show-content .foods-minus").unbind();
+
 			$(".show-content .foods-plus").click(function(){
 				var dom = $(this).closest('.food');
 				var foodId = dom.data('foodid');
@@ -262,43 +281,29 @@ detailModule = $.extend(detailModule, {
 				});
 
 				// 食物加减
-				$('.foods-plus').click(function(){
+				$('.food-item .foods-plus').click(function(){
 					var dom = $(this).closest('.food');
 					var foodId = dom.data('foodid');
 					var curObj = that.foods[foodId];
 					
 					curObj.plus(foodId);
-					// 创建、修改购物车元素
-					that.showCart(that, curObj);
-					// 将购物车中的所有内容保存到localSrorage
-					for (var n = 0; n < $(".show-content .food").length; n++){
-						var id = $('.show-content .food').eq(n).attr('data-foodid');
-						that.store(shopId, that.foods[id]);
-					}
+					
+					
 				});
-				$(".foods-minus").click(function(){
+				$(".food-item .foods-minus").click(function(){
 					var dom = $(this).closest('.food');
 					var foodId = dom.data('foodid');
 					var curObj = that.foods[foodId]
 
-					// 改变数量
+					// 改变数量，同时修改 localStorage
 					curObj.minus(foodId);
-
-					if (curObj.num > 0) {
-						// 修改、删除购物车元素
-						that.showCart(that, curObj);
-					}
-					// 将购物车中的所有内容保存到localSrorage
-					for (var n = 0; n < $(".show-content .food").length; n++){
-						var id = $('.show-content .food').eq(n).attr('data-foodid');
-						that.store(shopId, that.foods[id]);
-					}
 				});
 
 				// 加载浏览历史
 				var obj = that.store(shopId);
 				if (obj) {
 					for(var prop in obj) {
+						that.local[prop] = obj[prop];
 						that.foods[prop].num = obj[prop].num;
 						$("[data-foodId='"+ prop +"']").find('.foods-num').text(obj[prop].num).css("visibility", "visible");
 						$("[data-foodId='"+ prop +"']").find('.foods-minus').css("visibility", "visible");

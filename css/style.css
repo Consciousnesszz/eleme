@@ -297,11 +297,13 @@ i, b {
 	height: 100%;
 	color: #999;
 	font-size: 0.12rem;
-	line-height: 0.7rem;
 	text-align: center;
 	overflow: hidden;
+	padding-top: 0.1rem;
 }
-
+.footer ul li a i{
+	display: block;
+}
 
 
 
@@ -684,12 +686,18 @@ i, b {
 }
 .shop-footer .shop-cart .cart-img {
 	position: absolute;
+	background: #666;
 	width: 0.5rem;
 	height: 0.5rem;
-	background: #f00;
+	text-align: center;
+	line-height: 0.5rem;
 	border-radius: 50%;
 	top: -0.15rem;
 	left: 0.1rem;
+}
+.shop-footer .shop-cart .cart-img i {
+	font-size: 0.3rem;
+	color: #999
 }
 .shop-footer .shop-cart .cart-price {
 	margin-left: 0.7rem;
@@ -798,6 +806,16 @@ i, b {
    	height: 100%;
    	background: #fff;
 }
+.swipe-wrap .item div {
+	float: left;
+	width: 25%;
+	height: 50%;
+	text-align: center;
+}
+.swipe-wrap .item div img {
+	width: 50%;
+}
+
 
 /* 小数点布局 */
 #position{

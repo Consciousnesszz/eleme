@@ -24,6 +24,7 @@ var moduleCtrl = function(){
 	var module = null;
 
 	if (hashModuleMap[hash]) {
+		var moduleName = hash;
 		module = hashModuleMap[hash]; // 获取module
 	} else {
 		// 获取传送的坐标

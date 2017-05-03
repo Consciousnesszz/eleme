@@ -26,7 +26,8 @@ rlistModule = $.extend(rlistModule, {
 		if (geohash) {
 			/*--------获取定位---------*/
 			$.ajax({
-				url : "https://mainsite-restapi.ele.me/v2/pois/" + geohash,
+				// 因eleme限制 需开反向代理
+				url : "/v2/pois/" + geohash,
 				type : "get",
 				async : false,
 				success : function (response){
@@ -38,7 +39,7 @@ rlistModule = $.extend(rlistModule, {
 
 			/*--------获取轮播内容---------*/
 			$.ajax({
-				url : 'https://mainsite-restapi.ele.me/v2/index_entry?geohash=' + geohash,
+				url : '/v2/index_entry?geohash=' + geohash,
 				type : "get",
 				success : function(response){
 					for(var i = 0; i < response.length; i++) {
@@ -59,7 +60,7 @@ rlistModule = $.extend(rlistModule, {
 			/*--------获取热词---------*/ 
 			$(".rl-header .bottom ul").empty();
 			$.ajax({
-				url : "https://mainsite-restapi.ele.me/shopping/v3/hot_search_words",
+				url : "/shopping/v3/hot_search_words",
 				// url : "shopping/v3/hot_search_words",
 				data : {
 					latitude : that.lat,
@@ -78,7 +79,7 @@ rlistModule = $.extend(rlistModule, {
 			$(".temp").empty();
 			$(".dis").empty();
 			$.ajax({
-				url : "https://mainsite-restapi.ele.me/bgs/weather/current",
+				url : "/bgs/weather/current",
 				// url : "/bgs/weather/current",
 				data : {
 					latitude : that.lat,
@@ -92,7 +93,7 @@ rlistModule = $.extend(rlistModule, {
 
 			/*--------获取商家---------*/
 			$.ajax({
-				url : "https://mainsite-restapi.ele.me/shopping/restaurants",
+				url : "/shopping/restaurants",
 				// url : "/shopping/restaurants",
 				data : {
 					latitude : that.lat,
@@ -130,7 +131,7 @@ rlistModule = $.extend(rlistModule, {
 						count++;
 						// 动态加载
 						$.ajax({
-							url : "https://mainsite-restapi.ele.me/shopping/restaurants",
+							url : "/shopping/restaurants",
 							// url : "/shopping/restaurants",
 							data : {
 								latitude : that.lat,
